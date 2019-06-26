@@ -61,7 +61,8 @@ public class Server {
         if let privateKey = privateKey {
             b = BigUInt(privateKey)
         } else {
-            b = BigUInt(Data(bytes: try! Random.generate(byteCount: 128)))
+            var bytes = try! Random.generate(byteCount: 128)
+            b = BigUInt(Data(bytes: &bytes, count: 128))
         }
         let k = calculate_k(group: group, algorithm: algorithm)
         v = BigUInt(verificationKey)

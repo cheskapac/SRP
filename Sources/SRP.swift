@@ -26,7 +26,8 @@ public func createSaltedVerificationKey(
     algorithm: Digest.Algorithm = .sha1)
     -> (salt: Data, verificationKey: Data)
 {
-    let salt = salt ?? Data(bytes: try! Random.generate(byteCount: 16))
+    var bytes = try! Random.generate(byteCount: 16)
+    let salt = salt ?? Data(bytes: &bytes, count: 16)
     let x = calculate_x(algorithm: algorithm, salt: salt, username: username, password: password)
     return createSaltedVerificationKey(from: x, salt: salt, group: group)
 }
@@ -60,7 +61,8 @@ func createSaltedVerificationKey(
     group: Group = .N2048)
     -> (salt: Data, verificationKey: Data)
 {
-    let salt = salt ?? Data(bytes: try! Random.generate(byteCount: 16))
+    var bytes = try! Random.generate(byteCount: 16)
+    let salt = salt ?? Data(bytes: &bytes, count: 16)
     let v = calculate_v(group: group, x: x)
     return (salt, v.serialize())
 }

@@ -36,7 +36,8 @@ public class Client {
         if let privateKey = privateKey {
             a = BigUInt(privateKey)
         } else {
-            a = BigUInt(Data(bytes: try! Random.generate(byteCount: 128)))
+            var bytes = try! Random.generate(byteCount: 128)
+            a = BigUInt(Data(bytes: &bytes, count: 128))
         }
         // A = g^a % N
         A = group.g.power(a, modulus: group.N)

@@ -6,7 +6,8 @@ extension Digest {
         return { data in
             let digest = Digest(using: algorithm)
             _ = digest.update(data: data)
-            return Data(bytes: digest.final())
+            var bytes = digest.final()
+            return Data(bytes: &bytes, count: bytes.count)
         }
     }
 }

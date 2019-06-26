@@ -7,6 +7,27 @@ other parties. Not even the party you are proving your identity. See [Secure Rem
 
 [![Build Status](https://travis-ci.org/Bouke/SRP.svg?branch=master)](https://travis-ci.org/Bouke/SRP)
 
+## Installation
+
+### CocoaPods
+
+SRP is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'SRP', '~> 3.2.0'
+```
+
+### Swift Package Manager
+
+SRP is compatible with Swift Package Manager v4 (Swift 4 and above). Simply add it to the dependencies in your `Package.swift`.
+
+```Swift
+dependencies: [
+.package(url: "https://github.com/Bouke/SRP.git", from: "3.2.0")
+]
+```
+
 ## Example usage
 
 ```swift
