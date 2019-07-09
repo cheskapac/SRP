@@ -15,3 +15,11 @@ func + (lhs: Data, rhs: Data) -> Data {
     result.append(rhs)
     return result
 }
+
+extension Data {
+    var hexadecimal: String {
+        return map { String(format: "%02x", $0) }
+            .joined()
+    }
+}
+

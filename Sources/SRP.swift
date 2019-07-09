@@ -103,7 +103,12 @@ func calculate_k(group: Group, algorithm: Digest.Algorithm) -> BigUInt {
 //x = H(s | H(I | ":" | P))
 func calculate_x(algorithm: Digest.Algorithm, salt: Data, username: String, password: String) -> BigUInt {
     let H = Digest.hasher(algorithm)
-    return BigUInt(H(salt + H("\(username):\(password)".data(using: .utf8)!)))
+    let hash1 = "\(username):\(password)".data(using: .utf8)!
+    let hash2 = H(hash1)
+    let hash3 = (salt + hash2).hexadecimal
+    let hash4 = H(hash3.data(using: .utf8)!)
+    let hash = BigUInt(hash4)
+    return hash
 }
 
 // v = g^x % N

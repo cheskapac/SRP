@@ -59,12 +59,27 @@ public enum Group {
     /// Create custom group parameters. See the enum's documentation for
     /// considerations on good parameters.
     /// - Parameters:
-    ///   - prime: hex-encoded prime
-    ///   - generator: hex-encoded generator
+    ///   - primeHex: hex-encoded prime
+    ///   - generatorHex: hex-encoded generator
     /// - Returns: nil if one of the parameters chould not be decoded
-    public init?(prime: String, generator: String) {
-        guard let N = BigUInt(prime, radix: 16), let g = BigUInt(generator, radix: 16) else {
-            return nil
+    public init?(primeHex: String, generatorHex: String) {
+        guard let N = BigUInt(primeHex, radix: 16),
+            let g = BigUInt(generatorHex, radix: 16) else {
+                return nil
+        }
+        self = .custom(CustomGroup(N: N, g: g))
+    }
+
+    /// Create custom group parameters. See the enum's documentation for
+    /// considerations on good parameters.
+    /// - Parameters:
+    ///   - primeDecimal: decimal-encoded prime
+    ///   - generatorDecimal: decimal-encoded generator
+    /// - Returns: nil if one of the parameters chould not be decoded
+    public init?(primeDecimal: String, generatorDecimal: String) {
+        guard let N = BigUInt(primeDecimal, radix: 10),
+            let g = BigUInt(generatorDecimal, radix: 10) else {
+                return nil
         }
         self = .custom(CustomGroup(N: N, g: g))
     }
