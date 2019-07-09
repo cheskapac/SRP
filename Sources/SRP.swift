@@ -113,6 +113,7 @@ func calculate_x(algorithm: Digest.Algorithm, salt: Data, username: String, pass
 
 // v = g^x % N
 func calculate_v(group: Group, x: BigUInt) -> BigUInt {
-    let v = group.g.power(x, modulus: group.N)
+    let v1 = group.g.power(x, modulus: group.N)
+    let v = BigUInt(v1.serialize().hexadecimal, radix: 16)!
     return v
 }
