@@ -107,11 +107,12 @@ func calculate_x(algorithm: Digest.Algorithm, salt: Data, username: String, pass
     let hash2 = H(hash1)
     let hash3 = (salt + hash2).hexadecimal
     let hash4 = H(hash3.data(using: .utf8)!)
-    let hash = BigUInt(hash4)
+    let hash = BigUInt(hash4.hexadecimal, radix: 16)!
     return hash
 }
 
 // v = g^x % N
 func calculate_v(group: Group, x: BigUInt) -> BigUInt {
-    return group.g.power(x, modulus: group.N)
+    let v = group.g.power(x, modulus: group.N)
+    return v
 }
